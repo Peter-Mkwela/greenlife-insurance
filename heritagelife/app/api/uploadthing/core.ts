@@ -8,7 +8,7 @@ export const ourFileRouter = {
     image: { maxFileSize: '4MB' },
     pdf: { maxFileSize: '4MB' },
   }).onUploadComplete(async ({ file }) => {
-    console.log('Policyholder application uploaded:', file.url);
+    console.log('Policyholder application uploaded:', file.ufsUrl);
   }),
 
   // ✅ New endpoint for uploading claim files
@@ -16,7 +16,7 @@ export const ourFileRouter = {
     image: { maxFileSize: '4MB' },
     pdf: { maxFileSize: '4MB' },
   }).onUploadComplete(async ({ file }) => {
-    console.log('Claim file uploaded:', file.url);
+    console.log('Claim file uploaded:', file.ufsUrl);
   }),
 } satisfies FileRouter;
 
