@@ -6,15 +6,28 @@ type Role = 'system_admin' | 'agent' | 'stakeholder' | 'it_admin' | 'policyholde
 
 const verifyCaptcha = async (token: string) => {
   const secret = process.env.RECAPTCHA_SECRET_KEY;
-  const response = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `secret=${secret}&response=${token}`,
-  });
 
-  const data = await response.json();
-  return data.success;
+  if (!secret) {
+    console.error('❌ RECAPTCHA_SECRET_KEY is undefined');
+    return false;
+  }
+
+  try {
+    const response = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${secret}&response=${token}`,
+    });
+
+    const data = await response.json();
+    console.log('✅ CAPTCHA verification response:', data);
+    return data.success;
+  } catch (error: any) {
+    console.error('❌ CAPTCHA verification error:', error.message);
+    return false;
+  }
 };
+
 
 export async function POST(req: Request) {
   const { username, password, intendedRoute, captchaToken } = await req.json();
