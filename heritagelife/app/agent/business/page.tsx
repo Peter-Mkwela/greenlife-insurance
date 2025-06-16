@@ -35,7 +35,6 @@ const TrackBusinessPage = () => {
         setError('Failed to fetch policyholders');
       }
     };
-
     fetchPolicyholders();
   }, [agentId]);
 
