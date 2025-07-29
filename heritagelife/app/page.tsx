@@ -13,9 +13,8 @@ export default function Home() {
     // Assuming you have a way to check authentication manually (via localStorage, cookies, or another method)
     const userRole = localStorage.getItem("role"); // Example of fetching role from local storage or a cookie.
 
-    if (userRole === "SYSTEM_ADMIN") {
-      router.push("/system_admin/main");
-    } else if (userRole === "AGENT") {
+  
+    if (userRole === "AGENT") {
       router.push("/agent/main");
     } else if (userRole === "STAKEHOLDER") {
       router.push("/stakeholder/main");
@@ -101,9 +100,6 @@ export default function Home() {
             </Link>
             <Link href="./agent" className="nav-link">
               Agent
-            </Link>
-            <Link href="./system_admin" className="nav-link">
-              System Admin
             </Link>
             <Link href="./stakeholder" className="nav-link">
               Stakeholder
